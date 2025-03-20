@@ -30,12 +30,26 @@ public class CustomerController {
         return customerRepository.save(customer);
     }
 
-    @PutMapping("/update")
-    public Customer update() {
+    @PatchMapping("/update")
+    public Customer updateCurrent() {
         Customer customer = customerRepository.findById(102L).orElse(null);
         if (customer == null) return null;
         Address address = customer.getAddress();
-        address.setCity("Delhi");
+        address.setCity("New Delhi");
+        address.setPincode("110012");
+        address.setStreetNo("12 Parshuram marg");
+        customer.setAddress(address);
+        return customerRepository.save(customer);
+
+
+    }
+
+    @PutMapping("/update")
+    public Customer updateNew() {
+        Customer customer = customerRepository.findById(102L).orElse(null);
+        if (customer == null) return null;
+        Address address = customer.getAddress();
+        address.setCity("New Delhi");
         address.setPincode("110012");
         address.setStreetNo("12 Parshuram marg");
         customer.setAddress(address);
